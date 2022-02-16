@@ -7,7 +7,7 @@ import javax.persistence.Id;
 
 @Entity
 public class Users {
-
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String firstName;
@@ -18,7 +18,7 @@ public class Users {
     private String city;
     private String state;
     private int zipcode;
-    @Id
+    
     private String email;
     private String password;
 
