@@ -4,26 +4,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
 @Entity
-@Table(name = "users")
-public class User {
-    public static final String FIELD_ID = "id";
-    public static final String FIELD_FIRST_NAME = "firstName";
-    public static final String FIELD_LAST_NAME = "lastName";
-    public static final String FIELD_COUNTRY = "country";
-    public static final String FIELD_ADDRESS_LINE1 = "addressLine1";
-    public static final String FIELD_ADDRESS_LINE2 = "addressLine2";
-    public static final String FIELD_CITY = "city";
-    public static final String FIELD_STATE = "state";
-    public static final String FIELD_ZIPCODE = "zipcode";
-    public static final String FIELD_EMAIL = "email";
-    public static final String FIELD_PASSWORD = "password";
-
+public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private long id;
     private String firstName;
     private String lastName;
     private String country;
@@ -32,19 +18,16 @@ public class User {
     private String city;
     private String state;
     private int zipcode;
+    
     private String email;
     private String password;
 
-    public User() {
+    public Users(){
 
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getFirstName() {
@@ -57,6 +40,14 @@ public class User {
 
     public String getLastName() {
         return lastName;
+    }
+
+    public String getEmail(){
+        return email;
+    }
+
+    public void setEmail(String email){
+        this.email=email;
     }
 
     public void setLastName(String lastName) {
@@ -109,14 +100,6 @@ public class User {
 
     public void setZipcode(int zipcode) {
         this.zipcode = zipcode;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getPassword() {
