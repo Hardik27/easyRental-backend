@@ -8,7 +8,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class EasyRentalApplication implements CommandLineRunner {
+public class EasyRentalApplication{
 
     public static void main(String[] args) {
         SpringApplication.run(EasyRentalApplication.class, args);
@@ -16,19 +16,4 @@ public class EasyRentalApplication implements CommandLineRunner {
 
     @Autowired
     UserRepository userRepository;
-
-    @Override
-    public void run(String... args) throws Exception {
-        Users user=new Users();
-        user.setFirstName("Hardik");
-        user.setLastName("Ruparel");
-        user.setEmail("abc@gmail.com");
-        user.setCountry("USA");
-        user.setCity("Irvine");
-        user.setPassword("abc123");
-        user.setState("CA");
-        user.setAddressLine1("abc lane");
-        user.setZipcode(123456);
-        userRepository.save(user);
-    }
 }

@@ -1,9 +1,6 @@
 package com.example.easyrental.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Users {
@@ -18,12 +15,35 @@ public class Users {
     private String city;
     private String state;
     private int zipcode;
-    
+    @Column(unique = true)
     private String email;
     private String password;
+    private String mobile;
 
     public Users(){
 
+    }
+
+    public Users(String firstName, String lastName, String country, String addressLine1, String addressLine2, String city, String state, int zipcode, String email, String password, String mobile) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.country = country;
+        this.addressLine1 = addressLine1;
+        this.addressLine2 = addressLine2;
+        this.city = city;
+        this.state = state;
+        this.zipcode = zipcode;
+        this.email = email;
+        this.password = password;
+        this.mobile=mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    public String getMobile() {
+        return mobile;
     }
 
     public long getId() {
