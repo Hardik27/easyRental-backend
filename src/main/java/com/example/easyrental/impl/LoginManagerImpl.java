@@ -1,31 +1,20 @@
-package com.example.easyrental.controller;
-
+package com.example.easyrental.impl;
 
 import com.example.easyrental.dao.UserRepository;
-import com.example.easyrental.impl.LoginManagerImpl;
 import com.example.easyrental.model.Users;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Map;
 
-@RestController
-@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:8080"})
-public class UserController {
+@Service
+public class LoginManagerImpl {
 
     @Autowired
     UserRepository userRepository;
 
-    @Autowired
-    LoginManagerImpl loginManager;
-
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String loginUser(@RequestBody Map<String, Object> payload){
-        loginManager.login(payload);
-        return "ok";
-    }
-
-    /*public String login(@RequestBody Map<String, Object> payLoad){
+    public String login(Map<String, Object> payLoad){
         System.out.println("Here####");
         String email=(String)payLoad.get("email");
         String password=(String)payLoad.get("password");
@@ -39,15 +28,9 @@ public class UserController {
         }
         System.out.println("Login Failed.....");
         return "Invalid login";
-    }*/
-
-    @RequestMapping(value = "/registerUser", method = RequestMethod.POST)
-    public String registerUser(@RequestBody Map<String, Object> payload){
-        loginManager.registerUser(payload);
-        return "ok";
     }
 
-    /*public String registerUser(@RequestBody Map<String, Object> payLoad){
+    public String registerUser(Map<String, Object> payLoad){
         String firstName=(String)payLoad.get("firstName");
         String lastName=(String)payLoad.get("lastName");
         String email=(String)payLoad.get("email");
@@ -69,5 +52,5 @@ public class UserController {
         userRepository.save(user);
         System.out.println("Save complete.....");
         return "Save Complete...";
-    }*/
+    }
 }
