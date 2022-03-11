@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "bookings")
+@Table(name = "booking")
 public class Booking {
     public static final String FIELD_ID = "id";
     public static final String FIELD_USER_ID = "userId";

@@ -9,7 +9,7 @@ import javax.persistence.Table;
 import java.util.List;
 
 @Entity
-@Table(name = "products")
+@Table(name = "product")
 public class Product {
     public static final String FIELD_ID = "id";
     public static final String FIELD_TITLE = "title";
