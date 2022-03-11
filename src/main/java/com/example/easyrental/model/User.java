@@ -1,13 +1,9 @@
 package com.example.easyrental.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
-@Table(name = "users")
+@Table(name = "user")
 public class User {
     public static final String FIELD_ID = "id";
     public static final String FIELD_FIRST_NAME = "firstName";
@@ -32,11 +28,27 @@ public class User {
     private String city;
     private String state;
     private int zipcode;
+    @Column(unique = true)
     private String email;
     private String password;
+    private String mobile;
 
     public User() {
 
+    }
+
+    public User(String firstName, String lastName, String country, String addressLine1, String addressLine2, String city, String state, int zipcode, String email, String password, String mobile) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.country = country;
+        this.addressLine1 = addressLine1;
+        this.addressLine2 = addressLine2;
+        this.city = city;
+        this.state = state;
+        this.zipcode = zipcode;
+        this.email = email;
+        this.password = password;
+        this.mobile=mobile;
     }
 
     public Long getId() {

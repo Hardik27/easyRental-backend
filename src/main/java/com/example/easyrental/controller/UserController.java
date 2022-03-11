@@ -4,36 +4,61 @@ package com.example.easyrental.controller;
 import com.example.easyrental.dao.UserRepository;
 import com.example.easyrental.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.sql.*;
+import java.util.Map;
 
-@CrossOrigin(origins = "http://localhost:3000")
 @RestController
+@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:8080"})
 public class UserController {
     @Autowired
     UserRepository userRepository;
 
-    @GetMapping("/login")
-    public boolean login(@RequestBody User user) {
-        try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/easy_rental", "admin", "admin");
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("select * from users");
-            while (resultSet.next()) {
-                System.out.println(resultSet.getString("email"));
+    @RequestMapping(
+            value = "/login",
+            method = RequestMethod.POST)
+    public String login(@RequestBody Map<String, Object> payLoad){
+        System.out.println("Here####");
+        String email=(String)payLoad.get("email");
+        String password=(String)payLoad.get("password");
+        User currUser=userRepository.findByEmail(email);
+        if(currUser!=null){
+            System.out.println(email+","+password);
+            if(currUser.getPassword().equals(password)){
+                System.out.println("Login Successful");
+                return "Login successful";
             }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
         }
-        return false;
+        System.out.println("Login Failed.....");
+        return "Invalid login";
+
     }
 
-    @GetMapping("/setList")
-    public void setList() {
-        return;
+
+    @RequestMapping(
+            value = "/registerUser",
+            method = RequestMethod.POST)
+    public String registerUser(@RequestBody Map<String, Object> payLoad){
+        String firstName=(String)payLoad.get("firstName");
+        String lastName=(String)payLoad.get("lastName");
+        String email=(String)payLoad.get("email");
+        String password=(String)payLoad.get("password");
+        String mobile=(String) payLoad.get("mobile");
+        String country=(String) payLoad.get("country");
+        String addressLine1=(String) payLoad.get("addressLine1");
+        String addressLine2=(String) payLoad.get("addressLine2");
+        String city=(String)payLoad.get("city");
+        String state=(String)payLoad.get("state");
+        String zipCode=(String)payLoad.get("zipCode");
+        int zip=Integer.parseInt(zipCode);
+        User currUser=userRepository.findByEmail(email);
+        if(currUser!=null){
+            System.out.println("Same user with same email id found");
+            return "User Found with same email";
+        }
+        User user=new User(firstName, lastName, country, addressLine1, addressLine2, city, state, zip, email, password, mobile);
+        userRepository.save(user);
+        System.out.println("Save complete.....");
+        return "Save Complete...";
     }
 }
