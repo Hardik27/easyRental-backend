@@ -15,7 +15,7 @@ public class UserController {
     UserRepository userRepository;
 
     @RequestMapping(
-            value = "/login",
+            value = "/",
             method = RequestMethod.POST)
     public String login(@RequestBody Map<String, Object> payLoad){
         System.out.println("Here####");
