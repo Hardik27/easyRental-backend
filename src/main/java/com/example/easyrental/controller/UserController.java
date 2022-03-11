@@ -26,11 +26,11 @@ public class UserController {
             System.out.println(email+","+password);
             if(currUser.getPassword().equals(password)){
                 System.out.println("Login Successful");
-                return "Login successful";
+                return "Successful";
             }
         }
         System.out.println("Login Failed.....");
-        return "Invalid login";
+        return "Invalid";
 
     }
 
@@ -59,6 +59,6 @@ public class UserController {
         User user=new User(firstName, lastName, country, addressLine1, addressLine2, city, state, zip, email, password, mobile);
         userRepository.save(user);
         System.out.println("Save complete.....");
-        return "Save Complete...";
+        return "Successful";
     }
 }
