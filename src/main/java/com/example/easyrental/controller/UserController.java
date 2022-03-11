@@ -2,7 +2,7 @@ package com.example.easyrental.controller;
 
 
 import com.example.easyrental.dao.UserRepository;
-import com.example.easyrental.model.Users;
+import com.example.easyrental.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,7 +21,7 @@ public class UserController {
         System.out.println("Here####");
         String email=(String)payLoad.get("email");
         String password=(String)payLoad.get("password");
-        Users currUser=userRepository.findByEmail(email);
+        User currUser=userRepository.findByEmail(email);
         if(currUser!=null){
             System.out.println(email+","+password);
             if(currUser.getPassword().equals(password)){
@@ -51,12 +51,12 @@ public class UserController {
         String state=(String)payLoad.get("state");
         String zipCode=(String)payLoad.get("zipCode");
         int zip=Integer.parseInt(zipCode);
-        Users currUser=userRepository.findByEmail(email);
+        User currUser=userRepository.findByEmail(email);
         if(currUser!=null){
             System.out.println("Same user with same email id found");
             return "User Found with same email";
         }
-        Users user=new Users(firstName, lastName, country, addressLine1, addressLine2, city, state, zip, email, password, mobile);
+        User user=new User(firstName, lastName, country, addressLine1, addressLine2, city, state, zip, email, password, mobile);
         userRepository.save(user);
         System.out.println("Save complete.....");
         return "Save Complete...";
