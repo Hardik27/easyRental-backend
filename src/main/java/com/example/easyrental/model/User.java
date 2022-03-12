@@ -16,6 +16,7 @@ public class User {
     public static final String FIELD_ZIPCODE = "zipcode";
     public static final String FIELD_EMAIL = "email";
     public static final String FIELD_PASSWORD = "password";
+    public static final String FILED_MOBILE = "mobile";
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -137,5 +138,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
     }
 }
