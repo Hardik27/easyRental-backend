@@ -39,6 +39,17 @@ public class Product {
     public Product() {
     }
 
+    public Product(String title,String description, String userId, String price, List<String> tags, List<String> images, String productMetaData, boolean availability){
+        this.title = title;
+        this.description = description;
+        this.userId = userId;
+        this.price = price;
+        this.tags = tags;
+        this.images = images;
+        this.productMetaData = productMetaData;
+        this.availability = availability;
+    }
+
     public Long getId() {
         return id;
     }
