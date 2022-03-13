@@ -1,7 +1,9 @@
 package com.example.easyrental.controller;
 
 import com.example.easyrental.dao.ProductRepository;
+import com.example.easyrental.dao.UserRepository;
 import com.example.easyrental.model.Product;
+import com.example.easyrental.model.User;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,37 +16,38 @@ import java.util.stream.Stream;
 @CrossOrigin(origins = {"http://localhost:3000", "http://localhost:8080"})
 public class ProductController {
     final ProductRepository productRepository;
+    final UserRepository userRepository;
 
-    public ProductController(ProductRepository productRepository) {
+    public ProductController(ProductRepository productRepository, UserRepository userRepository) {
         this.productRepository = productRepository;
+        this.userRepository = userRepository;
     }
 
     @RequestMapping(
             value = "/registerProduct",
             method = RequestMethod.POST)
-    public String registerProduct(@RequestBody Map<String, Object> payLoad){
+    public String registerProduct(@RequestBody Map<String, Object> payLoad) {
 
-        String title=(String)payLoad.get(Product.FIELD_TITLE);
-        String description=(String)payLoad.get(Product.FIELD_DESCRIPTION);
-        String userId =(String)payLoad.get(Product.FIELD_USER_ID);
-        String price=(String)payLoad.get(Product.FIELD_PRICE);
-        List<String> tags= Stream.of(payLoad.get(Product.FIELD_TAGS))
+        String title = (String) payLoad.get(Product.FIELD_TITLE);
+        String description = (String) payLoad.get(Product.FIELD_DESCRIPTION);
+        String price = (String) payLoad.get(Product.FIELD_PRICE);
+        List<String> tags = Stream.of(payLoad.get(Product.FIELD_TAGS))
                 .map(object -> Objects.toString(object, null))
                 .collect(Collectors.toList());
-        List<String> images= Stream.of(payLoad.get(Product.FIELD_IMAGES))
+        List<String> images = Stream.of(payLoad.get(Product.FIELD_IMAGES))
                 .map(object -> Objects.toString(object, null))
                 .collect(Collectors.toList());
-        String productMetaData=(String) payLoad.get(Product.FIELD_PRODUCT_METADATA);
-        boolean availability=true;
-
-        //User currUser=userRepository.findByEmail(email);
-        if(title==null){
+        String productMetaData = (String) payLoad.get(Product.FIELD_PRODUCT_METADATA);
+        boolean availability = true;
+        String email = (String) payLoad.get(User.FIELD_EMAIL);
+        User currentUser = userRepository.findByEmail(email);
+        Long userId = currentUser.getId();
+        if (title == null) {
             System.out.println("Product with title doesn't exist");
-            return "Product Found with same title";
+            return "IncorrectDetails";
         }
-        Product product=new Product( title, description, userId,  price, tags, images, productMetaData, availability);
+        Product product = new Product(title, description, userId, price, tags, images, productMetaData, availability);
         productRepository.save(product);
-        System.out.println("Save complete.....");
         return "Successful";
     }
 }
