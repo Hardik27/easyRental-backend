@@ -2,8 +2,7 @@ package com.example.easyrental.controller;
 
 
 import com.example.easyrental.dao.UserRepository;
-import com.example.easyrental.impl.LoginManagerImpl;
-import com.example.easyrental.model.Users;
+import com.example.easyrental.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,62 +11,53 @@ import java.util.Map;
 @RestController
 @CrossOrigin(origins = {"http://localhost:3000", "http://localhost:8080"})
 public class UserController {
-
     @Autowired
     UserRepository userRepository;
 
-    @Autowired
-    LoginManagerImpl loginManager;
-
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String loginUser(@RequestBody Map<String, Object> payload){
-        loginManager.login(payload);
-        return "ok";
-    }
-
-    /*public String login(@RequestBody Map<String, Object> payLoad){
-        System.out.println("Here####");
-        String email=(String)payLoad.get("email");
-        String password=(String)payLoad.get("password");
-        Users currUser=userRepository.findByEmail(email);
-        if(currUser!=null){
-            System.out.println(email+","+password);
-            if(currUser.getPassword().equals(password)){
+    @RequestMapping(
+            value = "/",
+            method = RequestMethod.POST)
+    public String login(@RequestBody Map<String, Object> payLoad) {
+        String email = (String) payLoad.get(User.FIELD_EMAIL);
+        String password = (String) payLoad.get(User.FIELD_PASSWORD);
+        User currUser = userRepository.findByEmail(email);
+        if (currUser != null) {
+            System.out.println(email + "," + password);
+            if (currUser.getPassword().equals(password)) {
                 System.out.println("Login Successful");
-                return "Login successful";
+                return "Successful";
             }
         }
         System.out.println("Login Failed.....");
-        return "Invalid login";
-    }*/
+        return "Invalid";
 
-    @RequestMapping(value = "/registerUser", method = RequestMethod.POST)
-    public String registerUser(@RequestBody Map<String, Object> payload){
-        loginManager.registerUser(payload);
-        return "ok";
     }
 
-    /*public String registerUser(@RequestBody Map<String, Object> payLoad){
-        String firstName=(String)payLoad.get("firstName");
-        String lastName=(String)payLoad.get("lastName");
-        String email=(String)payLoad.get("email");
-        String password=(String)payLoad.get("password");
-        String mobile=(String) payLoad.get("mobile");
-        String country=(String) payLoad.get("country");
-        String addressLine1=(String) payLoad.get("addressLine1");
-        String addressLine2=(String) payLoad.get("addressLine2");
-        String city=(String)payLoad.get("city");
-        String state=(String)payLoad.get("state");
-        String zipCode=(String)payLoad.get("zipCode");
-        int zip=Integer.parseInt(zipCode);
-        Users currUser=userRepository.findByEmail(email);
-        if(currUser!=null){
+
+    @RequestMapping(
+            value = "/registerUser",
+            method = RequestMethod.POST)
+    public String registerUser(@RequestBody Map<String, Object> payLoad) {
+        String firstName = (String) payLoad.get(User.FIELD_FIRST_NAME);
+        String lastName = (String) payLoad.get(User.FIELD_LAST_NAME);
+        String email = (String) payLoad.get(User.FIELD_EMAIL);
+        String password = (String) payLoad.get(User.FIELD_PASSWORD);
+        String mobile = (String) payLoad.get(User.FILED_MOBILE);
+        String country = (String) payLoad.get(User.FIELD_COUNTRY);
+        String addressLine1 = (String) payLoad.get(User.FIELD_ADDRESS_LINE1);
+        String addressLine2 = (String) payLoad.get(User.FIELD_ADDRESS_LINE2);
+        String city = (String) payLoad.get(User.FIELD_CITY);
+        String state = (String) payLoad.get(User.FIELD_STATE);
+        String zipCode = (String) payLoad.get(User.FIELD_ZIPCODE);
+        int zip = Integer.parseInt(zipCode);
+        User currUser = userRepository.findByEmail(email);
+        if (currUser != null) {
             System.out.println("Same user with same email id found");
             return "User Found with same email";
         }
-        Users user=new Users(firstName, lastName, country, addressLine1, addressLine2, city, state, zip, email, password, mobile);
+        User user = new User(firstName, lastName, country, addressLine1, addressLine2, city, state, zip, email, password, mobile);
         userRepository.save(user);
         System.out.println("Save complete.....");
-        return "Save Complete...";
-    }*/
+        return "Successful";
+    }
 }

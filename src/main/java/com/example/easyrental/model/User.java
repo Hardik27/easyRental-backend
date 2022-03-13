@@ -3,10 +3,24 @@ package com.example.easyrental.model;
 import javax.persistence.*;
 
 @Entity
-public class Users {
+@Table(name = "user")
+public class User {
+    public static final String FIELD_ID = "id";
+    public static final String FIELD_FIRST_NAME = "firstName";
+    public static final String FIELD_LAST_NAME = "lastName";
+    public static final String FIELD_COUNTRY = "country";
+    public static final String FIELD_ADDRESS_LINE1 = "addressLine1";
+    public static final String FIELD_ADDRESS_LINE2 = "addressLine2";
+    public static final String FIELD_CITY = "city";
+    public static final String FIELD_STATE = "state";
+    public static final String FIELD_ZIPCODE = "zipCode";
+    public static final String FIELD_EMAIL = "email";
+    public static final String FIELD_PASSWORD = "password";
+    public static final String FILED_MOBILE = "mobile";
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
     private String firstName;
     private String lastName;
     private String country;
@@ -20,11 +34,11 @@ public class Users {
     private String password;
     private String mobile;
 
-    public Users(){
+    public User() {
 
     }
 
-    public Users(String firstName, String lastName, String country, String addressLine1, String addressLine2, String city, String state, int zipcode, String email, String password, String mobile) {
+    public User(String firstName, String lastName, String country, String addressLine1, String addressLine2, String city, String state, int zipcode, String email, String password, String mobile) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.country = country;
@@ -35,19 +49,15 @@ public class Users {
         this.zipcode = zipcode;
         this.email = email;
         this.password = password;
-        this.mobile=mobile;
-    }
-
-    public void setMobile(String mobile) {
         this.mobile = mobile;
     }
 
-    public String getMobile() {
-        return mobile;
+    public Long getId() {
+        return id;
     }
 
-    public long getId() {
-        return id;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getFirstName() {
@@ -60,14 +70,6 @@ public class Users {
 
     public String getLastName() {
         return lastName;
-    }
-
-    public String getEmail(){
-        return email;
-    }
-
-    public void setEmail(String email){
-        this.email=email;
     }
 
     public void setLastName(String lastName) {
@@ -122,11 +124,27 @@ public class Users {
         this.zipcode = zipcode;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public String getPassword() {
         return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
     }
 }
