@@ -27,7 +27,7 @@ public class Product {
     private Long id;
     private String title;
     private String description;
-    private String userId;
+    private Long userId;
     private String price;
     @ElementCollection
     private List<String> tags;
@@ -39,7 +39,7 @@ public class Product {
     public Product() {
     }
 
-    public Product(String title,String description, String userId, String price, List<String> tags, List<String> images, String productMetaData, boolean availability){
+    public Product(String title, String description, Long userId, String price, List<String> tags, List<String> images, String productMetaData, boolean availability) {
         this.title = title;
         this.description = description;
         this.userId = userId;
@@ -74,11 +74,11 @@ public class Product {
         this.description = description;
     }
 
-    public String getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 

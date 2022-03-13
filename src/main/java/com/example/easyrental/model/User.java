@@ -13,7 +13,7 @@ public class User {
     public static final String FIELD_ADDRESS_LINE2 = "addressLine2";
     public static final String FIELD_CITY = "city";
     public static final String FIELD_STATE = "state";
-    public static final String FIELD_ZIPCODE = "zipcode";
+    public static final String FIELD_ZIPCODE = "zipCode";
     public static final String FIELD_EMAIL = "email";
     public static final String FIELD_PASSWORD = "password";
     public static final String FILED_MOBILE = "mobile";
@@ -49,7 +49,7 @@ public class User {
         this.zipcode = zipcode;
         this.email = email;
         this.password = password;
-        this.mobile=mobile;
+        this.mobile = mobile;
     }
 
     public Long getId() {
