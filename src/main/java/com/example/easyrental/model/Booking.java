@@ -10,7 +10,9 @@ import javax.persistence.Table;
 @Table(name = "booking")
 public class Booking {
     public static final String FIELD_ID = "id";
-    public static final String FIELD_USER_ID = "userId";
+    public static final String FIELD_NAME = "name";
+    public static final String FIELD_OWNER_USER_ID = "ownerUserId";
+    public static final String FIELD_BORROWER_USER_ID = "borrowerUserId";
     public static final String FIELD_PRODUCT_ID = "productId";
     public static final String FIELD_STATUS = "status";
     public static final String FIELD_START_TIME = "startTime";
@@ -21,14 +23,27 @@ public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String userId;
-    private String productId;
+    private String name;
+    private Long ownerUserId;
+    private Long borrowerUserId;
+    private Long productId;
     private BookingStatus status;
     private long startTime;
     private long endTime;
     private long total_price;
 
     public Booking() {
+    }
+
+    public Booking(String name, Long ownerUserId, Long borrowerUserId, Long productId, BookingStatus status, long startTime, long endTime, long total_price) {
+        this.name = name;
+        this.ownerUserId = ownerUserId;
+        this.borrowerUserId = borrowerUserId;
+        this.productId = productId;
+        this.status = status;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.total_price = total_price;
     }
 
     public Long getId() {
@@ -39,19 +54,19 @@ public class Booking {
         this.id = id;
     }
 
-    public String getUserId() {
-        return userId;
+    public Long getOwnerUserId() {
+        return ownerUserId;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setOwnerUserId(Long userId) {
+        this.ownerUserId = userId;
     }
 
-    public String getProductId() {
+    public Long getProductId() {
         return productId;
     }
 
-    public void setProductId(String productId) {
+    public void setProductId(Long productId) {
         this.productId = productId;
     }
 
@@ -85,5 +100,21 @@ public class Booking {
 
     public void setTotal_price(long total_price) {
         this.total_price = total_price;
+    }
+
+    public Long getBorrowerUserId() {
+        return borrowerUserId;
+    }
+
+    public void setBorrowerUserId(Long borrowerUserId) {
+        this.borrowerUserId = borrowerUserId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
