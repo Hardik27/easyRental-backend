@@ -18,9 +18,8 @@ public class UserController {
             value = "/",
             method = RequestMethod.POST)
     public String login(@RequestBody Map<String, Object> payLoad) {
-        System.out.println("Here####");
-        String email = (String) payLoad.get("email");
-        String password = (String) payLoad.get("password");
+        String email = (String) payLoad.get(User.FIELD_EMAIL);
+        String password = (String) payLoad.get(User.FIELD_PASSWORD);
         User currUser = userRepository.findByEmail(email);
         if (currUser != null) {
             System.out.println(email + "," + password);
