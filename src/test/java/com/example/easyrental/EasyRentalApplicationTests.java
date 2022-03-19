@@ -5,10 +5,15 @@ import com.example.easyrental.controller.ProductController;
 import com.example.easyrental.controller.UserController;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
+@RunWith(SpringRunner.class)
+@EnableConfigurationProperties
 @SpringBootTest
 class EasyRentalApplicationTests {
 
@@ -22,10 +27,10 @@ class EasyRentalApplicationTests {
     UserController userController;
 
     @Test
-    void contextLoads() throws Exception {
-        //Assert.assertNotNull(bookingController);
-        //Assert.assertNotNull(productController);
-       // Assert.assertNotNull(userController);
+    void contextLoads() {
+        Assert.assertNotNull(bookingController);
+        Assert.assertNotNull(productController);
+        Assert.assertNotNull(userController);
     }
 
 }
