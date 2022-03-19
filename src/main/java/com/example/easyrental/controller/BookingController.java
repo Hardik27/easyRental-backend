@@ -34,7 +34,8 @@ public class BookingController {
             Long borrowerUserId = Long.valueOf((String) payLoad.get(Booking.FIELD_BORROWER_USER_ID));
             Long productId = Long.valueOf((String) payLoad.get(Booking.FIELD_PRODUCT_ID));
             Product product = productRepository.findById(productId).orElse(null);
-            if (product == null) return "CheckoutFailed";
+            if (product == null)
+                return "CheckoutFailed";
             Long ownerUserId = product.getUserId();
             String productName = product.getTitle();
             BookingStatus status = BookingStatus.RESERVED;
